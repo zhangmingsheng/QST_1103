@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /*
- * 运行以下程序，要求：
+ * 题目要求：
  * 0. 在个人仓库下，创建分支yourname_ex3
  * 1. 编写代码完成以下功能：
  * 		a. 从access.log中读入数据，获取IP和Time
