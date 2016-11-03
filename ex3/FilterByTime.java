@@ -18,21 +18,28 @@ import java.util.Scanner;
 public class FilterByTime {
 	
 	public static void main(String[] args) throws ParseException, FileNotFoundException{
+		Locale locale = Locale.US;
+		SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss", locale);
 		SimpleDateFormat regularFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date beginDate = regularFormat.parse("2015-12-31 18:00:00");
 		Date endDate = regularFormat.parse("2015-12-31 19:00:00");
 		String filePath = "./access.log";
 		FileInputStream inputStream = new FileInputStream(filePath);
 		Scanner scanner = new Scanner(inputStream, "UTF-8");
-		while (scanner.hasNext()){
+		String[] str = null;
+		while (scanner.hasNext()) {
 			// 对每行进行处理
 			String line = scanner.nextLine();
+			str = line.split(" ");
 			// 切分获取IP，Time
-			String strIp = null;
-			String strTime = null;
-			// 对在时间区间内的数据进行输出
-			System.out.println(strIp + "\t" + strTime);
+			String strIp = str[0];
+			String time = str[3].substring(1, str[3].length());
+			Date lineDate = inputFormat.parse(time);
+			if (lineDate.compareTo(endDate) < 0) {
+				if (lineDate.compareTo(beginDate) > 0) {
+					System.out.println(strIp + "	" + lineDate);
+				}
+			}
 		}
 	}
-	
 }
