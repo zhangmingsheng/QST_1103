@@ -15,19 +15,32 @@ import java.util.Scanner;
  */
 public class TimestampTransfer {
 	@SuppressWarnings("resource")
+	//main函数
 	public static void main(String[] args){
+		//获得控制台输入数据
 		Scanner scanner = new Scanner(System.in);
+		//定义一个输入流时间格式化对象
 		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//定义一个输出流的时间格式化对象
 		SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//判断scanner.hasNext()，为true，循环
 		while (scanner.hasNext()){
+			//读取输入字符串，并定义为String类型
 			String line = scanner.nextLine();
+			//定义Data类的lineDate对象
 			Date lineDate = null;
+			//定义long类型的对象
 			long lineTimestamp;
+			//捕获异常
 			try {
+				//将line转换成Date类型
 				lineDate = inputFormat.parse(line);
+				//将时间转换为时间戳
 				lineTimestamp = lineDate.getTime();
+				//输出时间和时间戳
 				System.out.println(outputFormat.format(lineDate) + " to " + lineTimestamp);
 			} catch (ParseException e) {
+				//异常处理
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
